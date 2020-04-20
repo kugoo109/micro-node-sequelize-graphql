@@ -18,6 +18,7 @@ export default {
   // Setting Globbed route files
   files: {
     routes: getGlobbedPaths(["dist/routes/**/*.js"]),
+    resolvers: getGlobbedPaths(["dist/resolvers/*.js", "dist/resolvers/**/*.js"]),
     handlers: getGlobbedPaths(["dist/handlers/**/*.js"]),
     models: getGlobbedPaths(["dist/models/*.js", "dist/models/**/*.js"]),
   },

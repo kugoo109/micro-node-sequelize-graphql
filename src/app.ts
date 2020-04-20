@@ -8,6 +8,7 @@ import cors from "cors";
 import morgan from "morgan";
 import passport from "./lib/passport";
 import winston, { LoggerStream } from "./lib/winston";
+import graphql from "./lib/graphql";
 
 const app = express();
 
@@ -31,5 +32,7 @@ app.use(compress({
 }));
 
 passport.init(app);
+
+graphql.init(app, "/graphql");
 
 export default app;

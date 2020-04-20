@@ -1,19 +1,34 @@
-import { Model, Table, Column, HasMany } from 'sequelize-typescript';
+import { Model, Table, Column, HasMany, PrimaryKey, Default, DataType, CreatedAt, UpdatedAt } from 'sequelize-typescript';
+import { ObjectType, Field, Int, Authorized, Float } from "type-graphql";
 import Note from './Note';
 
+@ObjectType()
 @Table
 export default class User extends Model<User> {
-
+  
+  @Field(type => Int)
+  @PrimaryKey
+  @Default(DataType.UUIDV4)
+  @Column(DataType.UUID)
+  id!: number;
+  
+  @Field()
   @Column 
-  email !: string;
+  email!: string;
 
+  @Field()
   @Column
-  username !: string;
+  username!: string;
 
+  @Field()
   @Column
-  password !: string;
+  password!: string;
 
-  @HasMany(() => Note) 
-  notes ?: Note[];
+  @Field()
+  @CreatedAt
+  createdAt!: Date;
 
+  @Field()
+  @UpdatedAt
+  updatedAt!: Date;
 }
