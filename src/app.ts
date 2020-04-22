@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 app.use(methodOverride());
 app.use(cookieParser());
 app.use(helmet())
-app.use(morgan("combined", { stream: new LoggerStream() }));
+app.use(morgan("tiny", { stream: new LoggerStream() }));
 app.use(cors());
 
 app.use(compress({
@@ -33,6 +33,6 @@ app.use(compress({
 
 passport.init(app);
 
-graphql.init(app, "/graphql");
+graphql.init(app);
 
 export default app;

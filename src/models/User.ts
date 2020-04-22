@@ -1,4 +1,4 @@
-import { Model, Table, Column, HasMany, PrimaryKey, Default, DataType, CreatedAt, UpdatedAt } from 'sequelize-typescript';
+import { Model, Table, Column, HasMany, PrimaryKey, Default, DataType, CreatedAt, UpdatedAt, AutoIncrement } from 'sequelize-typescript';
 import { ObjectType, Field, Int, Authorized, Float } from "type-graphql";
 import Note from './Note';
 
@@ -8,8 +8,8 @@ export default class User extends Model<User> {
   
   @Field(type => Int)
   @PrimaryKey
-  @Default(DataType.UUIDV4)
-  @Column(DataType.UUID)
+  @AutoIncrement
+  @Column
   id!: number;
   
   @Field()

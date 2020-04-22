@@ -1,0 +1,48 @@
+# Write your query or mutation here
+mutation createUser {
+  createUser(username: "test", password: "qwer", email: "test@mail.com") {
+    id
+    username
+    email
+    createdAt
+    updatedAt
+  }
+}
+
+mutation signin {
+  signin(username: "test", password: "qwer") {
+    user {
+      username
+      email
+    }
+    token
+  }
+}
+
+mutation createNote {
+  createNote(content: "test content") {
+    id
+    content
+    createdAt
+    user {
+      id
+      username
+      email
+    }
+    updatedAt
+  }
+}
+
+query getNotes {
+  allNotes {
+    id
+    content
+    createdAt
+    user {
+      id
+      username
+      email
+    }
+    updatedAt
+  }
+}

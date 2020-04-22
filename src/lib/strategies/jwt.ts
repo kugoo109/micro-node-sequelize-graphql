@@ -8,7 +8,6 @@ module.exports = function () {
   passport.use(new JwtStrategy({
     jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('jwt'),
     secretOrKey: config.tokenSecret,
-    algorithms: config.tokenAlgorithms,
   }, 
   function (jwt_payload, done) {
     User.findOne({

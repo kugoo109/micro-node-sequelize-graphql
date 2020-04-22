@@ -1,4 +1,5 @@
 import Note from "../models/Note";
+import User from "../models/User";
 import { CreateNoteType } from './../types/notes';
 
 export const create = async function(note: CreateNoteType) {
@@ -9,5 +10,5 @@ export const create = async function(note: CreateNoteType) {
 };
 
 export const list = async function() { 
-  return Note.findAll();
+  return Note.findAll({ include: [ User ] });
 };

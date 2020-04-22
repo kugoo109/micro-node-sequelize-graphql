@@ -1,3 +1,4 @@
+import path from "path";
 import { getGlobbedPaths } from "../utils/path";
 
 export default {
@@ -8,7 +9,7 @@ export default {
   },
   port: 3000,
   db: {
-    uri: "postgres://postgres:P@ssword123@localhost:5432/sample_dev",
+    uri: "postgres://postgres:P@ssword123@localhost:5432/postgres",
     // uri: "postgres://postgres:P@ssword123@postgres:5432/sample_dev",
     debug: false
   },
@@ -17,9 +18,9 @@ export default {
   tokenAlgorithms: [],
   // Setting Globbed route files
   files: {
-    routes: getGlobbedPaths(["dist/routes/**/*.js"]),
-    resolvers: getGlobbedPaths(["dist/resolvers/*.js", "dist/resolvers/**/*.js"]),
-    handlers: getGlobbedPaths(["dist/handlers/**/*.js"]),
-    models: getGlobbedPaths(["dist/models/*.js", "dist/models/**/*.js"]),
+    routes: getGlobbedPaths(path.join(__dirname, "../routes/**/*.{ts,js}")),
+    resolvers: getGlobbedPaths(path.join(__dirname, "../resolvers/**/*.{ts,js}")),
+    handlers: getGlobbedPaths(path.join(__dirname, "../handlers/**/*.{ts,js}")),
+    models: getGlobbedPaths(path.join(__dirname, "../models/**/*.{ts,js}")),
   },
 };

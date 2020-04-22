@@ -7,7 +7,7 @@ import { getGlobbedPaths } from './../utils/path';
 export default {
   init: function (app: Express) {
     // Initialize strategies
-    getGlobbedPaths(path.join(__dirname, "./strategies/**/*.js")).forEach(function (strategy) {
+    getGlobbedPaths(path.join(__dirname, "./strategies/**/*.{ts,js}")).forEach(function (strategy) {
       require(path.resolve(strategy))(config);
     });
 
