@@ -7,9 +7,9 @@ services:
   #     # - 9229:9229
   #   depends_on:
   #     - postgres
-  #   # command: 
-  #   #   - node
-  #   #   - "dist/server.js"
+  #   command: 
+  #     - node
+  #     - "dist/server.js"
   postgres:
     image: postgres
     environment:

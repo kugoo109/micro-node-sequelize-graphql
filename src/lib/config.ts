@@ -10,7 +10,7 @@ export default {
   port: 3000,
   db: {
     uri: "postgres://postgres:P@ssword123@localhost:5432/postgres",
-    // uri: "postgres://postgres:P@ssword123@postgres:5432/sample_dev",
+    // uri: "postgres://postgres:P@ssword123@postgres:5432/postgres",
     debug: false
   },
   tokenSecret: process.env.TOKEN_SECRET || "sEcReT",
