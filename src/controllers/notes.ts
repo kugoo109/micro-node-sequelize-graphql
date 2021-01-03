@@ -1,14 +1,15 @@
-import Note from "../models/Note";
-import User from "../models/User";
+import { NoteDto } from './../models/Note';
+import NoteRepository from "../repositories/NoteRepository";
 import { CreateNoteType } from './../types/notes';
 
-export const create = async function(note: CreateNoteType) {
-  return Note.create({
-    content: note.content,
-    userId: note.userId,
-  });
+export async function create (note: CreateNoteType) {
+  return NoteRepository.create(note);
 };
 
-export const list = async function() { 
-  return Note.findAll({ include: [ User ] });
+export async function find () { 
+  return NoteRepository.find();
+};
+
+export async function findById (id: string) { 
+  return NoteRepository.findOne({ id });
 };

@@ -1,6 +1,7 @@
-import config from "./lib/config";
-import sequelize from "./lib/sequelize";
+import config from "./core/config";
+import sequelize from "./core/sequelize";
 import app from "./app";
+import User from "./models/User";
 
 sequelize.connect((db) => {
 

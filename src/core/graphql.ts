@@ -1,4 +1,4 @@
-import "reflect-metadata";
+import { ErrorInterceptor } from './middlewares/graphql';
 import { Express } from "express";
 import { buildSchema } from "type-graphql";
 import { ApolloServer } from "apollo-server-express";
@@ -9,7 +9,9 @@ export default {
   init: async function(app: Express) {
 
     const schema = await buildSchema({
+      // authChecker,
       resolvers: config.files.resolvers.map(resolverPath => path.resolve(resolverPath)),
+      globalMiddlewares: [ErrorInterceptor],
     });
 
     const apolloServer = new ApolloServer({
@@ -20,7 +22,7 @@ export default {
       })
     });
 
-    apolloServer.applyMiddleware({ app });
+    apolloServer.applyMiddleware({ path: "/graphql", app });
 
   }
 };

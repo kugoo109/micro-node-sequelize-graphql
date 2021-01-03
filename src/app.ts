@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import express from "express";
 import bodyParser from "body-parser";
 import compress from "compression";
@@ -6,9 +7,11 @@ import cookieParser from "cookie-parser";
 import helmet from "helmet";
 import cors from "cors";
 import morgan from "morgan";
-import passport from "./lib/passport";
-import winston, { LoggerStream } from "./lib/winston";
-import graphql from "./lib/graphql";
+import passport from "./core/passport";
+import winston, { LoggerStream } from "./core/winston";
+import graphql from "./core/graphql";
+import routes from "./routes";
+import errorHandler from "./core/middlewares/errorHandler";
 
 const app = express();
 
@@ -32,7 +35,9 @@ app.use(compress({
 }));
 
 passport.init(app);
-
 graphql.init(app);
+app.use('/api', routes);
+
+app.use(errorHandler());
 
 export default app;

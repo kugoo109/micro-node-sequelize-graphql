@@ -1,17 +1,15 @@
 import path from "path";
-import { getGlobbedPaths } from "../utils/path";
+import { getGlobbedPaths } from "./utils/path";
 
 export default {
   app: {
-    title: "Sample Task REST API",
+    title: "Sample API",
     version: "1.0.0",
-    description: "A solution to the problem provided by Sample"
+    description: ""
   },
   port: 3000,
   db: {
-    uri: "postgres://postgres:P@ssword123@localhost:5432/postgres",
-    // uri: "postgres://postgres:P@ssword123@postgres:5432/postgres",
-    debug: false
+    uri: process.env.DB_URI,
   },
   tokenSecret: process.env.TOKEN_SECRET || "sEcReT",
   tokenExpiresIn: process.env.TOKEN_EXPIRES_IN || 5356800, // in seconds

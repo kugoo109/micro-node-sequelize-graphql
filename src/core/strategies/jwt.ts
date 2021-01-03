@@ -1,7 +1,8 @@
+import { UserDto } from './../../models/User';
 import passport from "passport";
 import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt"
 import config from "../config";
-import User from "../../models/User";
+import UserRepository from "../../repositories/UserRepository";
 
 module.exports = function () {
   // Use jwt strategy
@@ -10,10 +11,9 @@ module.exports = function () {
     secretOrKey: config.tokenSecret,
   }, 
   function (jwt_payload, done) {
-    User.findOne({
-      where: {
-        id: jwt_payload.id,
-      },
+
+    UserRepository.findOne({
+      id: jwt_payload.id,
     }).then(user => {
 
       if (!user) {

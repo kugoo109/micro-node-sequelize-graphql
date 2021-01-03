@@ -1,10 +1,12 @@
+import { UserInputError } from './../core/errors';
+import { UserDto } from './../models/User';
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import User from "../models/User";
-import config from "../lib/config";
+import UserRepository from "../repositories/UserRepository";
+import config from "../core/config";
 import { CreateUserType } from "./../types/users";
 
-export const create = async function (user: CreateUserType) {
+export async function create (user: CreateUserType) {
 
   const username = user.username;
   const password = user.password;
@@ -12,29 +14,27 @@ export const create = async function (user: CreateUserType) {
 
   const hashedPassword = await bcrypt.hash(password, 16);
 
-  return User.create({
+  return UserRepository.create({
     email,
     username,
     password: hashedPassword,
   });
 };
 
-export const signin = async function (username: string, password: string) {
+export async function signin (username: string, password: string) {
   
-  const user = await User.findOne({
-    where: {
-      username: username.toLowerCase()
-    }
-  });
+  const user = await UserRepository.findOne({
+    username: username.toLowerCase()
+  })
 
   if (!user) {
-    throw new Error('Invalid username or password');
+    throw new UserInputError('Invalid username or password');
   }
 
   const same = await bcrypt.compare(password, user.password);
   
   if (!same) {
-    throw new Error('Invalid username or password');
+    throw new UserInputError('Invalid username or password');
   }
 
   // Remove sensitive data before login

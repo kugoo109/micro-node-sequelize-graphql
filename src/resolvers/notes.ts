@@ -1,24 +1,22 @@
-import { Resolver, Mutation, Query, Field, ArgsType, Args, Ctx } from "type-graphql";
-import Note from "../models/Note";
+import { LoginAccess } from '../policies/graphql/auth';
+import { NoteDto } from './../models/Note';
+import { AuthenticatedContext } from './../types/resolvers';
+import { CreateNoteArgs } from './../types/resolvers/notes';
+import { Resolver, Mutation, Query, Field, ArgsType, Args, Ctx, UseMiddleware } from "type-graphql";
 import * as NoteController from "../controllers/notes";
-import { Context } from './../types/users';
-
-@ArgsType()
-class CreateNoteArgs implements Partial<Note> {
-  @Field()
-  content!: string;
-}
 
 @Resolver()
 export class NoteResolver {
 
-  @Query(() => [Note])
-  async allNotes(@Ctx() context: Context) {
-    return await NoteController.list();
+  @Query(() => [NoteDto])
+  @UseMiddleware(LoginAccess)
+  async allNotes(@Ctx() context: AuthenticatedContext) {
+    return await NoteController.find();
   }
 
-  @Mutation(() => Note)
-  async createNote(@Args() note: CreateNoteArgs, @Ctx() context: Context) {
+  @Mutation(() => NoteDto)
+  @UseMiddleware(LoginAccess)
+  async createNote(@Args() note: CreateNoteArgs, @Ctx() context: AuthenticatedContext) {
     return await NoteController.create({
       ...note,
       userId: context.user.id

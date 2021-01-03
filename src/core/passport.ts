@@ -2,7 +2,7 @@ import { Express } from 'express';
 import passport from "passport";
 import path from "path";
 import config from "./config";
-import { getGlobbedPaths } from './../utils/path';
+import { getGlobbedPaths } from './utils/path';
 
 export default {
   init: function (app: Express) {

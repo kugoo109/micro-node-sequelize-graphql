@@ -1,15 +1,17 @@
 version: "2"
 services:
-  # api:
-  #   build: .
-  #   ports:
-  #     - "3000:3000"
-  #     # - 9229:9229
-  #   depends_on:
-  #     - postgres
-  #   command: 
-  #     - node
-  #     - "dist/server.js"
+  api:
+    build: .
+    ports:
+      - "3000:3000"
+      # - 9229:9229
+    depends_on:
+      - postgres
+    environment:
+      DB_URI: "postgres://postgres:P@ssword123@postgres:5432/postgres"
+    command: 
+      - node
+      - "dist/server.js"
   postgres:
     image: postgres
     environment:

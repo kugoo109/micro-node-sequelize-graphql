@@ -1,0 +1,14 @@
+{
+  "name": "Sample API V1 GraphQL Schema",
+  "extensions": {
+    "endpoints": {
+      "Sample API V1 GraphQL Endpoint": {
+        "url": "http://localhost:3000/graphql",
+        "headers": {
+          "user-agent": "JS GraphQL"
+        },
+        "introspect": false
+      }
+    }
+  }
+}

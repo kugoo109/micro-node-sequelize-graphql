@@ -24,11 +24,7 @@ mutation createNote {
     id
     content
     createdAt
-    user {
-      id
-      username
-      email
-    }
+    userId
     updatedAt
   }
 }
