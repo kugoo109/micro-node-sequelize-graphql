@@ -7,7 +7,7 @@
     "start:ts": "npx ts-node-dev src/server.ts",
     "clean": "rm -rf dist",
     "build": "npm run clean && npx tsc",
-    "test": "mocha"
+    "test": "jest --detectOpenHandles"
   },
   "dependencies": {
     "@typegoose/typegoose": "^7.4.5",
@@ -33,7 +33,7 @@
     "lodash": "^4.17.15",
     "method-override": "^2.3.9",
     "moment": "^2.24.0",
-    "mongoose": "^5.11.8",
+    "mongoose": "^5.11.10",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
